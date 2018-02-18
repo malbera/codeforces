@@ -1,3 +1,4 @@
-# Idea 
-.idea/**
+ .idea/**
 *.iml
+.gradle/**
+gradle/
