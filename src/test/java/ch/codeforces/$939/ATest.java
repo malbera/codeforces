@@ -8,11 +8,11 @@ public class ATest {
 
     @Test
     public void triangleFound() {
-        assertEquals("YES", A.findTriangle(new int []{2, 4, 5, 1, 3}));
+        assertEquals("YES", A.findTriangle(new int []{2, 4, 5, 1, 3, 0}, 5));
     }
 
     @Test
     public void triangleNotFound() {
-        assertEquals("NO", A.findTriangle(new int []{5, 5, 5, 5, 1, 0}));
+        assertEquals("NO", A.findTriangle(new int []{5, 5, 5, 5, 1, 0}, 5));
     }
 }
