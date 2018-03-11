@@ -4,37 +4,28 @@ import java.util.Scanner;
 
 public class B {
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        long count = in.nextLong();
-		int boxCount = in.nextInt();
-		long [] boxDef = new long [boxCount];
-        for (int i=0; i<boxCount; i++) {
-            boxDef[i] = in.nextLong();
-        }
-        System.out.println(findGoodBox(boxDef, count));
-    }
+	public static void main(String[] args) {
 
-    static String findGoodBox(long [] boxes, long count) {
-        int boxNumber = 0;
-		long result = mod(count, boxes[0]);
-		if (result == 0) {
-			return String.format("%d %d", 1, count / boxes[0]);
+		Scanner in = new Scanner(System.in);
+		int count = in.nextInt(), boxCount = in.nextInt();
+		int [] boxes = new int[boxCount];
+		for(int i=0; i<boxCount; i++) {
+			boxes[i] = in.nextInt();
 		}
-        for (int i=1; i<boxes.length; i++) {
-			long boxSize = mod(count, boxes[i]);
-			if (boxSize == 0) {
-				return String.format("%d %d", i+1, count / boxes[i]);
+		System.out.println(findProperBox(boxes, count));
+	}
+
+	static String findProperBox(int[] boxes, int count) {
+		int result = count;
+		int resultBox = 0;
+		for (int i=0; i<boxes.length; i++) {
+			int boxCapacity = boxes[i];
+			int currentBoxCount = count % boxCapacity;
+			if (currentBoxCount < result) {
+				result = currentBoxCount;
+				resultBox = i+1;
 			}
-			if (boxSize < result) {
-				result = boxSize;
-				boxNumber = i;
-            }
-        }
-        return String.format("%d %d", boxNumber + 1, count / boxes[boxNumber]);
-    }
-	
-	static long mod(long a, long b) {
-		return a % b;
+		}
+		return String.format("%d %d", resultBox, count / boxes[resultBox-1]);
 	}
 }
